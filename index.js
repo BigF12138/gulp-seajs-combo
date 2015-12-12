@@ -548,15 +548,7 @@ var filterIgnore = function( ignore, id, origId ){
 
     // 插件入口函数
     createStream = function( options ){
-        var o = {
-                modArr : [],
-                config : {},
-                unique : {},
-                uuid : 0,
-                contents : '',
-                encoding : 'UTF-8',
-                verbose : !!~process.argv.indexOf( '--verbose' )
-            };
+        
 
         if( options ){
             if( options.ignore ){
@@ -577,6 +569,15 @@ var filterIgnore = function( ignore, id, origId ){
         }
 
         return through.obj(function( file, enc, callback ){
+			var o = {
+                modArr : [],
+                config : {},
+                unique : {},
+                uuid : 0,
+                contents : '',
+                encoding : 'UTF-8',
+                verbose : !!~process.argv.indexOf( '--verbose' )
+            };
             if( file.isBuffer() ){
                 parseContent( o, file.contents.toString(), file.path )
                     .then(function(){
